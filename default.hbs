@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {{! Document Settings}}
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  {{! Page Meta}}
+  <title>{{meta_title}}</title>
+  <meta name="description" content="{{meta_description}}" />
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  {{!-- <link rel="shortcut icon" href="{{asset "favicon.ico"}}"> --}}
+
+  {{! Scripts and Styles}}
+  <link rel="stylesheet" type="text/css" href="{{asset "lib/bootstrap/css/bootstrap.css"}}" />
+  <link rel="stylesheet" type="text/css" href="{{asset "css/yeti.css"}}" />
+  <link rel="stylesheet" type="text/css" href="{{asset "css/screen.css"}}" />
+
+  {{!-- Google Analytics --}}
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-54544543-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+
+  {{! Ghost outputs important style and meta data with this tag }}
+  {{ghost_head}}
+</head>
+<body class="{{body_class}} {{#is 'index, tag, author'}}user{{/is}} {{#is 'post'}}{{#unless post.image}}noimage{{/unless}}{{/is}}">
+
+  <div role="navigation" class="navbar navbar-inverse">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" data-toggle="collapse" data-target=".navbar-ex1-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="//movingjoburg.co.za" class="navbar-brand"><span>Moving Joburg</span></a>
+      </div>
+      <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/about/">About</a></li>
+          <li><a href="/blog/">Blog</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="hidden"><a>Filter Services</a></li>
+          <li><a href="/stops">Stations & Stops</a></li>
+          <li><a href="/routes">Routes</a></li>
+          <li><a href="/hubs">Hubs</a></li>
+          <li><a href="/fares">Fare Guide</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="application">
+    <div class="container">
+      {{{body}}}
+
+      {{#if @blog.logo}}
+        <a href="{{@blog.url}}" id="blog_badge">
+          <span style="background-image: url('{{@blog.logo}}');">{{@blog.title}}</span>
+        </a>
+      {{/if}}    
+
+      <script>
+          {{#is 'post'}}
+              function get_text(el) {
+                  ret = "";
+                  var length = el.childNodes.length;
+                  for(var i = 0; i < length; i++) {
+                      var node = el.childNodes[i];
+                      if(node.nodeType != 8) {
+                          ret += node.nodeType != 1 ? node.nodeValue : get_text(node);
+                      }
+                  }
+                  return ret;
+              }
+              function reading_time () {
+                  var post_content = document.getElementById('js-post-content');
+                  if (post_content) {
+                      var words = get_text(post_content),
+                          count = words.split(/\s+/).length,
+                          read_time = Math.ceil((count / 150)),
+                          read_time_node = document.createTextNode(read_time + ' min read');
+                      document.getElementById('js-reading-time').appendChild(read_time_node);
+                  }
+              }
+          {{/is}}
+          function no_schema_links () {
+              var links = document.querySelectorAll('.js-remove-domain-schema');
+              if (links) {
+                  for (i = 0; i < links.length; ++i) {
+                      var link = links[i],
+                          text = link.innerHTML,
+                          no_schema = text.replace(/.*?:\/\//g, "");
+                      link.innerHTML = no_schema;
+                  }
+              }
+          }
+          window.onload = function () {
+              no_schema_links();
+              {{#is 'post'}}
+              reading_time();
+              {{/is}}
+          }
+      </script>
+
+      {{! Ghost outputs important scripts and data with this tag }}
+      {{ghost_foot}}
+
+      {{#is 'post'}}
+        <script>
+          $(function(){
+            var share_modal = $("#share_modal"),
+                update_social_links = true;
+            $("#btn_share").click(function(){
+                var that = $(this);
+                share_modal.fadeIn(200);
+                return false;
+            });
+            share_modal.click(function(e){
+                if (e.target.className == "wrap" || e.target.id == "share_modal") {
+                    share_modal.fadeOut(200);
+                }
+                return false;
+            });
+            share_modal.find("div.inner > header > a.close").click(function(){
+                share_modal.fadeOut(200);
+                return false;
+            });
+          });
+        </script>
+      {{/is}}
+
+    </div>
+  </div>
+  {{> "footer"}}
+
+</body>
+</html>
