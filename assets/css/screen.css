@@ -1,8 +1,17 @@
 html {
 	height: 100%;
+	position: relative;
 }
 body {
 	height: 100%;
+	padding-top: 46px;
+	background: #fbfbfb;
+	font-size: 1.6em;
+	line-height: 1.5em;
+}
+
+.clearfix {
+	clear: both;
 }
 
 a {
@@ -27,9 +36,12 @@ a {
 	height: 360px;
 }
 .stationlistcapped {
-	height: 300px;
+	max-height: 300px;
 	overflow: auto;
-	/*border: 1px solid #cc0000;*/
+}
+.servicelistcapped {
+	max-height: 600px;
+	overflow: auto;
 }
 #scheduleTable {
 	overflow: auto;
@@ -40,38 +52,6 @@ a {
 #map {
 	width: 100%;
 	min-height: 180px;
-}
-
-ul.routelist {
-	list-style: none;
-	text-align: left;
-	margin-left: 15px;
-	padding-left: 0;
-}
-ul.routelist > p {
-	margin-left: -18px;
-}
-ul.routelist li {
-	padding: 4px 10px 4px 0px;
-	display: block;
-}
-ul.routelist li a {
-	text-decoration: none;
-}
-ul.routelist > li.active > a > .badge {
-	float: right;
-}
-li > a.pill-red, li > a.pill-red:hover {
-	color: white;
-	background: #d9534f;
-	display: block;
-	width: 100%;
-}
-.stationlistcapped a:hover {
-	color: #ffbb33;
-}
-.agency-menu {
-	margin-top: 7px;
 }
 .warn {
 	background: #d9534f;
@@ -91,73 +71,65 @@ li > a.pill-red, li > a.pill-red:hover {
 }
 
 
-.stationresults {
-	margin-top: 10px;
-}
-
-.stationlink {
-	cursor: pointer;
-}
-
-
-
-/* landing */
-.landing {
-	position: relative;
-	display: table;
-	height: 100%;
-	width: 100%;
-	min-height: 100%;
-}
-.landing-container {
-	/*max-width: 700px;*/
-	margin: 0 auto;
-}
-
-.dark {
-	color: whitesmoke;
-	background: #0c0c0c;
-}
-.light {
-	background: #ffbb33;
-}
-.text-dark {
-	color: #fefefe !important;
-}
-
 /* navbar */
 .navbar {
-	background: #1C0920;
+	background: whitesmoke;
 	margin-bottom: 0;
+	border-bottom: solid 1px #c3c3c3;
 }
 .navbar-header, .navbar-collapse {
-	color: #171717;
+	color: #1c0920;
 }
-.navbar-header a:hover, .navbar-collapse a:hover {
+/*.navbar-header a:hover, .navbar-collapse a:hover {
 	background: #ffbb33;
+}*/
+.navbar-brand:hover {
+	background: #eeeeee;
 }
 .navbar-brand img {
-	height: 20px;
+	height: 24px;
 }
 /* navbar links */
-.navbar-inverse .navbar-brand {
-	color: whitesmoke;
+.navbar-brand {
+	color: #1c0920;
+	font-size: 110%;
+	font-weight: bold;
 }
-.navbar-inverse .navbar-nav > li > a, .navbar-inverse .navbar-brand {
-	color: whitesmoke;
+.navbar-nav > li > a, .navbar-brand {
+	color: #1c0920;
 }
 
-.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-brand:hover {
+.navbar-nav > li > a:hover, .navbar-brand:hover {
 	color: #ffbb33;
 }
-.navbar-inverse .navbar-toggle .icon-bar {
+.navbar-toggle .icon-bar {
 	background: #ffbb33;
 }
+@media all and (max-width: 767px), (max-width: 767px) {
+	.navbar-nav > li > a {
+		color: whitesmoke;
+	}
 
+	.navbar-nav > li > a:hover {
+		color: #ffbb33;
+	}
+	.navbar-collapse {
+		background: #1c0920;
+	}
+}
 
 .overflow-auto {
 	overflow: auto;
 }
+/* typography */
+a {
+	color: #0099cc;
+}
+h1.heading, h2.heading, h3.heading, h4.heading, h5.heading, h6.heading {
+	text-align: left;
+	/*font-weight: bold;*/
+}
+
 /* thumbnails */
 .gallery > * {
 	display: inline-block;
@@ -175,14 +147,6 @@ li > a.pill-red, li > a.pill-red:hover {
 		width: 25%;
 	}
 }
-/* typography */
-a {
-	color: #0099cc;
-}
-h1.heading, h2.heading, h3.heading, h4.heading, h5.heading, h6.heading {
-	text-align: left;
-	/*font-weight: bold;*/
-}
 /* navbar */
 .content {
 	overflow: auto;
@@ -194,7 +158,7 @@ h1.heading, h2.heading, h3.heading, h4.heading, h5.heading, h6.heading {
 	vertical-align: middle;
 	display: table-cell;
 }
-@media all and (max-width: 768), (min-width: 768) {
+@media all and (max-width: 768), (max-width: 768) {
 	body {
 		font-size: 80%;
 	}
@@ -261,59 +225,19 @@ table tr {
 .nav-pills > li {
 	/*background: #f8f8f8;*/
 }
+
+li > a.pill-red, li > a.pill-red:hover {
+	background: #d9534f;
+}
+.nav li > a.pill-rwtto, .dropdown-menu li > a.pill-rwtto {
+	background: #d9534f;
+	color: whitesmoke !important;
+}
+.nav > li > a.pill-rwtto:hover, .dropdown-menu > li > a.pill-rwtto:hover {
+	background: #f44336;
+}
 .nav-floating > li {
 	float: left;
-}
-
-/* typeahead stuff */
-.twitter-typeahead .tt-query,
-.twitter-typeahead .tt-hint {
-	margin-bottom: 0;
-}
-
-.tt-dropdown-menu {
-	min-width: 160px;
-	margin-top: 2px;
-	padding: 5px 0;
-	background-color: #fff;
-	border: 1px solid #ccc;
-	border: 1px solid rgba(0,0,0,.2);
-	*border-right-width: 2px;
-	*border-bottom-width: 2px;
-	-webkit-border-radius: 6px;
-		 -moz-border-radius: 6px;
-					border-radius: 6px;
-	-webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
-		 -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
-					box-shadow: 0 5px 10px rgba(0,0,0,.2);
-	-webkit-background-clip: padding-box;
-		 -moz-background-clip: padding;
-					background-clip: padding-box;
-}
-
-.tt-suggestion {
-	display: block;
-	padding: 3px 20px;
-}
-
-.tt-suggestion.tt-is-under-cursor {
-	color: #fff;
-	background-color: #0081c2;
-	background-image: -moz-linear-gradient(top, #0088cc, #0077b3);
-	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0077b3));
-	background-image: -webkit-linear-gradient(top, #0088cc, #0077b3);
-	background-image: -o-linear-gradient(top, #0088cc, #0077b3);
-	background-image: linear-gradient(to bottom, #0088cc, #0077b3);
-	background-repeat: repeat-x;
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0077b3', GradientType=0)
-}
-
-.tt-suggestion.tt-is-under-cursor a {
-	color: #fff;
-}
-
-.tt-suggestion p {
-	margin: 0;
 }
 
 @media all {
@@ -409,4 +333,56 @@ table tr {
 	float: left;
 	margin-right: 9px;
 	border-radius: 100%;
+}
+
+.author-image {
+	width: 100px;
+	height: 100px;
+	float: left;
+	margin-right: 9px;
+}
+
+.author-image img {
+	width: 100%;
+	height: auto;
+}
+.author-meta {
+	clear: both;
+	width: 100%;
+	display: block;
+	margin-top: 20px;
+	font-size: 1.0em;
+}
+
+.share i {
+	padding: 10px;
+	margin: 0 10px 5px 0;
+}
+.share a {
+	text-decoration: none;
+	color: #bbcccc;
+}
+.icon-twitter:hover {
+	color: #55acee;
+}
+.icon-facebook:hover {
+	color: #3b5998;
+}
+.icon-google-plus:hover {
+	color: #dd4b39;
+}
+
+.image-holder {
+	width: 100%;
+	height: 240px;
+	overflow: hidden;
+}
+.image-holder img {
+	width: 100%;
+	height: auto;
+	overflow:hidden;
+}
+
+.post-content {
+	margin-top: 20px;
 }

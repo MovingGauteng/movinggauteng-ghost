@@ -1,3 +1,14 @@
 {{!< default}}
 
+{{! featured image}}
+{{#is "home"}}
+  <header class="header">
+    {{#if @blog.cover}}
+
+
+    {{/if}}
+
+  </header>
+{{/is}}
+
 {{> "loop"}}

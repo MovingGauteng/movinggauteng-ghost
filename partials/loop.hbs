@@ -6,34 +6,33 @@
 
 <div class="row">
 {{#foreach posts}}
-<div class="{{post_class}}, col-xs-12 col-lg-8 col-lg-offset-2">
+<div class="{{post_class}} col-xs-12 col-lg-10 col-lg-offset-1">
 
-  {{#if image}}
-      <div class="image-holder show">
+  <!-- {{#if image}}
+    <div class="image-holder show">
       <a href="{{url}}" class="inner" style="background-image: url('{{image}}');">
       	<img src="{{image}}">
       </a>
     </div>
-  {{/if}}
-
-{{!--   <div class="meta">
-    <time datetime="{{date format='YYYY-MM-DD'}}"><a href="{{url}}">{{date format="MMMM DD, YYYY"}}</a></time>
-  </div> --}}
+  {{/if}} -->
 
   <header>
-    <h2 class="page-header"><a href="{{url}}">{{title}}</a></h2>
+    <h2 class="heading"><a href="{{url}}">{{title}}</a></h2>
   </header>
 
-  <div class="text">  
+  <p>
+    {{#if author.image}}<img class="author-thumb" src="{{author.image}}" alt="Author image" nopin="nopin" />{{/if}}
+    by {{author}}
+    {{tags prefix="| on "}}
+     | posted:
+    <span><time class="post-date" datetime="{{date format='YYYY-MM-DD'}}">{{date format="DD MMMM YYYY"}}</time></span>
+  </p>
+
+  <div class="text">
     <p>{{excerpt words="45"}}</p>
     <a href="{{url}}" class="readmore">Continue Reading</a>
   </div>
-  <footer class="post-meta">
-        {{#if author.image}}<img class="author-thumb" src="{{author.image}}" alt="Author image" nopin="nopin" />{{/if}}
-        {{author}}
-        {{tags prefix=" on "}}
-        <time class="post-date" datetime="{{date format='YYYY-MM-DD'}}">{{date format="DD MMMM YYYY"}}</time>
-    </footer>
+  <hr>
 </div>
 {{/foreach}}
 

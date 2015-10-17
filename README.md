@@ -1,4 +1,4 @@
-movingjoburg-ghost
+movinggauteng-ghost
 ==================
 
-Ghost theme for Moving Joburg
+Ghost theme for Moving Gauteng

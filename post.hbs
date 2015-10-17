@@ -11,70 +11,95 @@
 
   <article class="{{post_class}}">
 
-    <header class="post-header">
-      <h2 class="page-header">{{title}}</a></h2>
+    <header class="header">
+      <h2>{{title}}</a></h2>
     </header>
+
+    <hr>
+
+    {{! time and tags }}
+    <section class="post-meta">
+      <div class="col-xs-12">
+        <div class="content">
+          <p>
+            <i class="fa fa-calendar"></i>
+            <time class="post-date" datetime="{{date format='YYYY-MM-DD'}}">{{date format="DD MMMM YYYY"}}</time> {{tags prefix=" on "}}
+          </p>
+          <p><span id="js-reading-time"></span></p>
+        </div>
+      </div>
+    </section>
+
+    <div class="clearfix"></div>
+
+    <hr>
 
     <section class="post-content">
       {{content}}
     </section>
 
+    <hr>
+
     <footer class="post-footer">
 
-    {{! Everything inside the #author tags pulls data from the author }}
-    {{#author}}
+      {{! Everything inside the #author tags pulls data from the author }}
+      {{#author}}
 
-      {{#if image}}
-      <figure class="author-image">
-        <a class="img" href="{{url}}" style="background-image: url({{image}})"><span class="hidden">{{name}}'s Picture</span></a>
-      </figure>
-      {{/if}}
+        <div class="well well-sm">
+          <div class="media">
+            <a href="{{url}}">
+              <img class="media-object author-image" src="{{image}}" alt="{{name}}'s picture'"/>
+            </a>
 
-      <section class="author">
-        <h4><a href="{{url}}">{{name}}</a></h4>
-
-        {{#if bio}}
-          <p>{{bio}}</p>
-        {{else}}
-          <p>Read <a href="{{url}}">more posts</a> by this author.</p>
-        {{/if}}
-        <div class="author-meta">
-          {{#if location}}<span class="author-location icon-location">{{location}}</span>{{/if}}
-          {{#if website}}<span class="author-link icon-link"><a href="{{website}}">{{website}}</a></span>{{/if}}
+            <div class="media-body">
+              <div class="media-heading">
+                <a href="{{url}}">{{name}}</a>
+              </div>
+              {{#if bio}}
+                <p>{{bio}}</p>
+              {{else}}
+                <p>Read <a href="{{url}}">more posts</a> by this author.</p>
+              {{/if}}
+            </div>
+          <div class="author-meta">
+            {{#if location}}<p class="author-location icon-location"><i class="fa fa-map-marker"></i> {{location}}</p>{{/if}}
+            {{#if website}}<p class="author-link icon-link"><i class="fa fa-link"></i> <a href="{{website}}">{{website}}</a></p>{{/if}}
+          </div>
+          </div>
         </div>
-      </section>
 
-    {{/author}}
-
-    <section class="post-meta">
-      <div class="col-sx-12">
-        <div class="content">
-          <ul class="nav nav-pills nav-stacked">
-            <li>
-              <a class="pill-red">
-                <time class="post-date" datetime="{{date format='YYYY-MM-DD'}}">{{date format="DD MMMM YYYY"}}</time> {{tags prefix=" on "}}
-                </a>
-              </li>
-          </ul>
-        </div>
-      </div>
-    </section>
+      {{/author}}
 
       <section class="share">
-        <h4>Share this post</h4>
+        <h5>Share this post</h5>
         <a class="icon-twitter" href="https://twitter.com/share?text={{encode title}}&amp;url={{url absolute="true"}}"
           onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-          <span class="hiddens">Twitter</span>
+          <i class="fa fa-twitter fa-lg"></i>
         </a>
         <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u={{url absolute="true"}}"
           onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
-          <span class="hiddens">Facebook</span>
+          <i class="fa fa-facebook-f fa-lg"></i>
         </a>
         <a class="icon-google-plus" href="https://plus.google.com/share?url={{url absolute="true"}}"
            onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
-          <span class="hiddens">Google+</span>
+          <i class="fa fa-google-plus fa-lg"></i>
         </a>
       </section>
+
+      {{! comments }}
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+          /* * * CONFIGURATION VARIABLES * * */
+          var disqus_shortname = 'movinggauteng';
+
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+              var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 
     </footer>
 

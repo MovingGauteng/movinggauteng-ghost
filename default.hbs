@@ -15,41 +15,40 @@
 
   {{! Scripts and Styles}}
   <link rel="stylesheet" type="text/css" href="{{asset "lib/bootstrap/css/bootstrap.css"}}" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="{{asset "css/yeti.css"}}" />
   <link rel="stylesheet" type="text/css" href="{{asset "css/screen.css"}}" />
-
-  {{!-- Google Analytics --}}
-  <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-54544543-1', 'auto');
-  ga('send', 'pageview');
-  </script>
 
   {{! Ghost outputs important style and meta data with this tag }}
   {{ghost_head}}
 </head>
 <body class="{{body_class}} {{#is 'index, tag, author'}}user{{/is}} {{#is 'post'}}{{#unless post.image}}noimage{{/unless}}{{/is}}">
 
-  <div role="navigation" class="navbar navbar-inverse">
+  <div role="navigation" class="navbar navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
-        <button type="button" data-toggle="collapse" data-target=".navbar-ex1-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="//movingjoburg.co.za" class="navbar-brand"><span>Moving Joburg</span></a>
+        <button type="button" data-toggle="collapse" data-target=".navbar-ex1-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="http://localhost:5000" class="navbar-brand"><img src="/img/movinggauteng.png"></a><a href="http://localhost:5000" class="navbar-brand"><span>Moving Gauteng</span></a>
       </div>
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav">
           <li><a href="/about/">About</a></li>
-          <li><a href="/blog/">Blog</a></li>
+          <li class="active"><a href="/blog/">Blog</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="hidden"><a>Filter Services</a></li>
           <li><a href="/stops">Stations & Stops</a></li>
           <li><a href="/routes">Routes</a></li>
-          <li><a href="/hubs">Hubs</a></li>
-          <li><a href="/fares">Fare Guide</a></li>
+          <li><a href="/boards">Boards</a></li>
+          <li class="hidden-sm"><a href="/favourites">My Favourites</a></li>
+          <li class="hidden-sm"><a href="/fares">Fare Guide</a></li>
+          <li class="hidden-sm"><a href="https://rwt.to" target="blank" class="pill-rwtto">Trip Planner</a></li>
+          <li class="dropdown visible-sm"><a data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle">More<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/favourites">My Favourites</a></li>
+              <li><a href="/fares">Fare Guide</a></li>
+              <li class="hidden-sm"><a href="https://rwt.to" target="blank" class="pill-rwtto">Trip Planner</a></li>
+            </ul>
+          </li>
         </ul>
       </div>
     </div>
@@ -58,12 +57,6 @@
   <div id="application">
     <div class="container">
       {{{body}}}
-
-      {{#if @blog.logo}}
-        <a href="{{@blog.url}}" id="blog_badge">
-          <span style="background-image: url('{{@blog.logo}}');">{{@blog.title}}</span>
-        </a>
-      {{/if}}    
 
       <script>
           {{#is 'post'}}
@@ -138,6 +131,17 @@
     </div>
   </div>
   {{> "footer"}}
+  <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'movinggauteng';
 
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+  </script>
 </body>
 </html>
